@@ -10,7 +10,7 @@ console.log(articleCMS);
 const dataPartenaire= cms.formateur(articleCMS);//données formatées
 console.log(dataPartenaire); 
 
-const partenaireTemplate= await fetchRessource("/src/view/partenaire/partenaireTemplate.html"); //Template de la page programme
+const partenaireTemplate= await fetchRessource("../../view/partenaire/partenaireTemplate.html"); //Template de la page programme
 
 function affichageItem(tab,conteneur){ 
        

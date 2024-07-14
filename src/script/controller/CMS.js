@@ -111,7 +111,7 @@ export default function CMS(){
         cardItem[i].addEventListener('click',()=>{
           console.log("click");
             localStorage.setItem('infoItem', JSON.stringify(this.progItemFromTitle(data,cardItem[i].id)))
-            window.open('/src/view/information/information.html','_self');
+            window.open('../../view/information/information.html','_self');
         })
       }
     }

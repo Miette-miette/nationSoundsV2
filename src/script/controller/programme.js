@@ -14,7 +14,7 @@ console.log(articleCMS);
 const dataArticle= cms.formateur(articleCMS);//données formatées
 console.log(dataArticle); 
 
-const progTemplate= await fetchRessource("/src/view/programme/programmeTemplate.html"); //Template de la page programme
+const progTemplate= await fetchRessource("../../view/programme/programmeTemplate.html"); //Template de la page programme
 
 let progFiltre={//DONNEES DES FILTRES
     

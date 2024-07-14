@@ -14,7 +14,7 @@ console.log(articleCMS);
 let dataArticle= cms.formateur(articleCMS);
 console.log(dataArticle); //données formatées
 
-const concertTemplate= await fetchRessource("/src/view/concert/concertTemplate.html"); //Template de la page concert
+const concertTemplate= await fetchRessource("../../view/concert/concertTemplate.html"); //Template de la page concert
 
 const tabScenes=["Euphorie","Fusion","Reverie","Resonance","Prisme"];
 

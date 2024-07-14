@@ -25,12 +25,12 @@ let progFiltre={//DONNEES DES FILTRES
 }
 
 let iconeScene={//ICONES DES SCENES
-    "Euphorie":"./media/euphorie.png",
-    "Fusion":"./media/fusion.png",
-    "Reverie":"./media/reverie.png",
+    "Euphorie":"/src/assets/media/scene/euphorie.png",
+    "Fusion":"/src/assets/media/scene/fusion.png",
+    "Reverie":"/src/assets/media/scene/fusion.png",
     "Patio":"./media/le patio.png",
-    "Prisme":"./media/prisme.png",
-    "Resonance":"./media/resonance.png",
+    "Prisme":"/src/assets/media/scene/prisme.png",
+    "Resonance":"/src/assets/media/scene/resonance.png",
 }
 
 //Fonction AFFICHAGE

@@ -11,11 +11,11 @@ function showMenu(){
 
         if(menuCollapse.style.display==="flex"){
             menuCollapse.style.display="none";
-            menuImg.src="../media/icons/list.svg";     
+            menuImg.src="/src/assets/media/icon/list.svg";     
         }
         else{
             menuCollapse.style.display="flex";
-            menuImg.src="./media/icons/x.svg"  
+            menuImg.src="/src/assets/media/icon/x.svg"  
         }
     })
     

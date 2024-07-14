@@ -1,5 +1,5 @@
 import CMS from './CMS.js';
-import fetchRessource from './fetchRessource.js';
+import fetchRessource from '../model/fetchArticle.js';
 
 let cms= new CMS(); 
 
@@ -25,9 +25,9 @@ console.log(dataArticle);
 
 //TEMPLATES
 
-const artisteTemplate= await fetchRessource("/templates/carouselCard.html"); //Template du carousel artiste
+const artisteTemplate= await fetchRessource("/src/view/generals/carouselCard.html"); //Template du carousel artiste
 
-const articleTemplate= await fetchRessource("/templates/articleCard.html"); 
+const articleTemplate= await fetchRessource("/src/view/generals/articleCard.html"); 
 
 //AFFICHAGE
 

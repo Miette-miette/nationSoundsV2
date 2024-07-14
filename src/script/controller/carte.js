@@ -1,6 +1,6 @@
 import CMS from './CMS.js';
 import ressourceCarte from './ressourcesCarte.js';
-import fetchRessource from './fetchRessource.js';
+import fetchRessource from '../model/fetchArticle.js';
 
 let cms= new CMS(); 
 
@@ -17,11 +17,11 @@ console.log(infoCarte);
 
 // TEMPLATES
 
-const infoConcertTemplate= await fetchRessource("./templates/carteConcertTemplate.html");//Affichage des evenements
+const infoConcertTemplate= await fetchRessource("/src/view/carte/template/carteConcertTemplate.html");//Affichage des evenements
 
-const infoFoodTemplate= await fetchRessource("./templates/carteFoodTemplate.html");//Affichage des restaurants
+const infoFoodTemplate= await fetchRessource("/src/view/carte/template/carteFoodTemplate.html");//Affichage des restaurants
 
-const aucunConcertTemplate= await fetchRessource("./templates/aucunEvent.html");//Affichage si event=null
+const aucunConcertTemplate= await fetchRessource("/src/view/carte/template/aucunEvent.html");//Affichage si event=null
 
 // DONNEES FORMATEES
 

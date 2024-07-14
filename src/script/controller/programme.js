@@ -1,6 +1,6 @@
 import CMS from './CMS.js';
 import filtreProgramme from './filtreProgramme.js';
-import fetchRessource from './fetchRessource.js';
+import fetchRessource from '../model/fetchArticle.js';
 
 let cms= new CMS(); 
 
@@ -14,7 +14,7 @@ console.log(articleCMS);
 const dataArticle= cms.formateur(articleCMS);//données formatées
 console.log(dataArticle); 
 
-const progTemplate= await fetchRessource("./templates/programmeTemplate.html"); //Template de la page programme
+const progTemplate= await fetchRessource("/src/view/programme/programmeTemplate.html"); //Template de la page programme
 
 let progFiltre={//DONNEES DES FILTRES
     
@@ -28,7 +28,7 @@ let iconeScene={//ICONES DES SCENES
     "Euphorie":"/src/assets/media/scene/euphorie.png",
     "Fusion":"/src/assets/media/scene/fusion.png",
     "Reverie":"/src/assets/media/scene/fusion.png",
-    "Patio":"./media/le patio.png",
+    "Patio":"/src/assets/media/scene/le patio.png",
     "Prisme":"/src/assets/media/scene/prisme.png",
     "Resonance":"/src/assets/media/scene/resonance.png",
 }
@@ -41,19 +41,6 @@ function affichageItem(tab){
         tab[i]= cms.replaceTemplate(tab[i],progTemplate); 
     }
     document.getElementById('progConteneur').innerHTML=tab.join(' '); 
-}
-
-//ADD EVENT LISTENER POUR GENERER LA PAGE INFO
-
-function storageData(){
-    let progItem=document.getElementsByClassName("progItem");
-
-    for (let i=0;i<progItem.length;i++){
-        progItem[i].addEventListener('click',()=>{
-            localStorage.setItem('progItem', JSON.stringify(cms.progItemFromTitle(dataArticle,progItem[i].id)))
-            window.open('./information.html','_self');
-        })
-    }
 }
 
 //Affichage ALL

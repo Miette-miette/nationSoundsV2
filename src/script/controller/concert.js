@@ -1,6 +1,6 @@
 import CMS from './CMS.js';
 import filtreProgramme from './filtreProgramme.js';
-import fetchRessource from './fetchRessource.js';
+import fetchRessource from '../model/fetchArticle.js';
 
 let cms= new CMS(); 
 
@@ -14,7 +14,7 @@ console.log(articleCMS);
 let dataArticle= cms.formateur(articleCMS);
 console.log(dataArticle); //données formatées
 
-const concertTemplate= await fetchRessource("./templates/concertTemplate.html"); //Template de la page concert
+const concertTemplate= await fetchRessource("/src/view/concert/concertTemplate.html"); //Template de la page concert
 
 const tabScenes=["Euphorie","Fusion","Reverie","Resonance","Prisme"];
 

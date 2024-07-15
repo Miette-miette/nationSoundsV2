@@ -8,8 +8,6 @@ let cms= new CMS();
 const hostArticle="https://nation-soundswp-am41helgut.live-website.com/wp-json/wp/v2/posts?categories=5";
 const hostConcert="https://nation-soundswp-am41helgut.live-website.com/wp-json/wp/v2/posts?categories=19&per_page=60";
 
-
-
 let concertCMS= await cms.dataCMS(hostConcert);// Articles programmation de Nation Sounds WP 
 
 let articleCMS= await cms.dataCMS(hostArticle);//Articles actu
@@ -58,8 +56,20 @@ for (let a=0;a<dataArticle.length;a++){
 
 affichageCarousel(dataArticle,articleTemplate,'articleConteneur');
 
-cms.pageInformation("carouselCard",concert);
-cms.pageInformation("articleCard",article);
+function pageInfo(classItem,data){
+    let cardItem=document.getElementsByClassName(classItem);
+
+    for (let i=0;i<cardItem.length;i++){
+      cardItem[i].addEventListener('click',()=>{
+        console.log("click");
+          localStorage.setItem('infoItem', JSON.stringify(cms.progItemFromTitle(data,cardItem[i].id)))
+          window.open('./src/view/information/information.html','_self');
+      })
+    }
+  }
+
+pageInfo("carouselCard",concert);
+pageInfo("articleCard",article);
 
 
 

@@ -1,4 +1,4 @@
-import CMS from './CMS.js';
+import CMS from '../model/CMS.js';
 import filtreProgramme from './filtreProgramme.js';
 import fetchRessource from '../model/fetchArticle.js';
 

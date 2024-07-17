@@ -1,4 +1,4 @@
-import CMS from './CMS.js';
+import CMS from '../model/CMS.js';
 import ressourceCarte from './ressourcesCarte.js';
 import fetchRessource from '../model/fetchArticle.js';
 

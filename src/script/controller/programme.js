@@ -34,36 +34,33 @@ let iconeScene={//ICONES DES SCENES
 }
 
 //Fonction AFFICHAGE
-
 function affichageItem(tab){  
    
-    for(let i=0;i<tab.length;i++){
-        tab[i]= cms.replaceTemplate(tab[i],progTemplate); 
-    }
-    document.getElementById('progConteneur').innerHTML=tab.join(' '); 
+    let displayEvent=[];
+
+    tab.forEach((event) => displayEvent.push(cms.replaceTemplate(event,progTemplate)));
+   
+    document.getElementById('progConteneur').innerHTML=displayEvent.join(' '); 
 }
 
 //Affichage ALL
-
 let all=[];
 
-for (let i=0;i<dataArticle.length;i++){
-        let sceneName=Object.keys(iconeScene);
-        let sceneImg=Object.values(iconeScene);
+dataArticle.forEach(itemScene =>{
+    let sceneName=Object.keys(iconeScene);
+    let sceneImg=Object.values(iconeScene);
 
-        for(let j=0;j<sceneName.length;j++){
-            if(dataArticle[i].scene==sceneName[j]){
-            dataArticle[i]["iconScene"]=sceneImg[j];
-        }   
+    for(let j=0;j<sceneName.length;j++){
+        if(itemScene.scene==sceneName[j]){
+        itemScene["iconScene"]=sceneImg[j];
+        } 
     }
-    
-    all.push(dataArticle[i]);   
-}
+    all.push(itemScene);
+})
 affichageItem(all);
 cms.pageInformation("progItem",dataArticle);
 
 //Fonction FILTRAGE 
-
 function filtrageItem(data,progFiltre){
     let progTab=[];
     
@@ -76,7 +73,6 @@ function filtrageItem(data,progFiltre){
 }
 
 //RECUPERER LES DONNEES DES INPUTS
-
 function filtreChange(){
 
     //JOUR
@@ -94,11 +90,9 @@ function filtreChange(){
     console.log(progFiltre);
     //FILTRAGE 
     filtrageItem(dataArticle,progFiltre);
-
 }
 
 //ADD EVENT LISTENER SUR LES SELECTS ET INPUTS
-
 function setup(){
 
     //Recuperation des input
@@ -107,37 +101,29 @@ function setup(){
     
     //Recuperation des select
     let onchangeSelect= document.getElementsByTagName('select');
-    for (let i=0;i<onchangeSelect.length;i++){
-      onchangeSelect[i].addEventListener('change',filtreChange);
-    } 
-  }
-
+    Array.from(onchangeSelect).forEach((input) => input.addEventListener('change',filtreChange));
+}
 setup();
 
 //SLIDER FILTRE POUR LA VERSION MOBILE ET TABLETTE
-
 function showFiltre(){
 
     const progFiltreConteneur=document.getElementById('filtreTitre');
-
     const filtre=document.getElementsByClassName('filtreConteneur');
-
     const imgFleche=document.getElementsByClassName('voirPlus');
 
     progFiltreConteneur.addEventListener('click', ()=>{
-        for(let i=0;i<filtre.length;i++){
-       
-            if(filtre[i].style.display==="flex"){
-                filtre[i].style.display="none";
+
+        Array.from(filtre).forEach(displayFiltre =>{
+            if(displayFiltre.style.display==="flex"){
+                displayFiltre.style.display="none";
                 imgFleche[0].style.rotate="82deg";
             }
             else{
-                filtre[i].style.display="flex";
+                displayFiltre.style.display="flex";
                 imgFleche[0].style.rotate="265deg";
             } 
-        }  
-    })
-            
-        
+        })
+    })       
 }
 showFiltre();

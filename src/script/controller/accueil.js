@@ -27,50 +27,44 @@ const artisteTemplate= await fetchRessource("/src/view/generals/carouselCard.htm
 
 const articleTemplate= await fetchRessource("/src/view/generals/articleCard.html"); 
 
-//AFFICHAGE
+//FONCTION POUR LE TEMPLATING HTML
 
-function affichageCarousel(tab,template,idConteneur){  
-   
-    for(let i=0;i<tab.length;i++){
-        tab[i]= cms.replaceTemplate(tab[i],template); 
-    }
-    document.getElementById(idConteneur).innerHTML=tab.join(' '); 
+function affichageCarousel(tab,template,idConteneur){ 
+
+  let displayArticles=[];
+
+  tab.forEach((article) => displayArticles.push(cms.replaceTemplate(article,template)));
+
+  //Convertion des objets "article" en template HTML   
+  document.getElementById(idConteneur).innerHTML=displayArticles.join(' '); 
 }
 
-//CAROUSEL ARTISTES
-
+//AFFICHAGE CAROUSEL ARTISTES
 let concert=[];
 
-for (let c=0;c<dataConcert.length;c++){
-    concert.push(dataConcert[c]);
-}
- 
+dataConcert.forEach((displayConcert)=>concert.push(displayConcert))
 affichageCarousel(dataConcert.slice(-7),artisteTemplate,'conteneurCarousel');
 
-//ARTICLES FESTIVAL
+//AFFICHAGE ARTICLES FESTIVAL
+
 let article=[];
 
-for (let a=0;a<dataArticle.length;a++){
-    article.push(dataArticle[a]);
-}
-
+dataArticle.forEach((displayArticle)=>article.push(displayArticle))
 affichageCarousel(dataArticle,articleTemplate,'articleConteneur');
+
+//RECUPERATION DES DONNEES POUR GENERER LA PAGE INFORMATION
 
 function pageInfo(classItem,data){
     let cardItem=document.getElementsByClassName(classItem);
 
-    for (let i=0;i<cardItem.length;i++){
-      cardItem[i].addEventListener('click',()=>{
-        console.log("click");
-          localStorage.setItem('infoItem', JSON.stringify(cms.progItemFromTitle(data,cardItem[i].id)))
-          window.open('./src/view/information/information.html','_self');
-      })
-    }
+    //Conversion du HTML Collection en un array
+    Array.from(cardItem).forEach((card) => card.addEventListener('click',()=>{
+    
+      //Récuperation des données du click pour afficher la page information avec les données choisies
+      localStorage.setItem('infoItem', JSON.stringify(cms.progItemFromTitle(data,card.id)))
+      window.open('../src/view/information/information.html','_self');
+      }));
   }
 
 pageInfo("carouselCard",concert);
 pageInfo("articleCard",article);
-
-
-
-

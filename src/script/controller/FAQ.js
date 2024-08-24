@@ -9,24 +9,17 @@ console.log(imgFleche);
 
 function showQuestion(){
 
-for(let f=0;f<question.length;f++){
-    question[f].addEventListener('click', ()=>{
-        console.log(question[f]);
+    for(let f=0;f<question.length;f++){
+        question[f].addEventListener('click', ()=>{
 
-
-           if(reponse[f].style.display==="flex"){
+            if(reponse[f].style.display==="flex"){
                 reponse[f].style.display="none";
                 imgFleche[f].style.rotate="82deg";
-                console.log(reponse);
             }
             else{
                 reponse[f].style.display="flex";
                 imgFleche[f].style.rotate="265deg";  
-                console.log(reponse);
             } 
-        })
-
-        
-    }
-    
+        })    
+    }   
 }

@@ -107,9 +107,10 @@ let listMarkerMap= document.getElementsByClassName('leaflet-marker-icon');
 console.log(listMarkerMap);
 
 function newListMarker(){
-    /*listMarkerMap.forEach((marker)=>{
+
+    Array.from(listMarkerMap).forEach((marker)=>{
         let nameId=marker.src.match(markerIdRegex);
-        console.log(nameId);
+
         nameId=nameId[0].split('/');
         nameId=nameId[1].split('.')[0];
         marker.id=nameId;
@@ -117,19 +118,7 @@ function newListMarker(){
         marker.addEventListener('click',()=>{
             infoLieu(marker.id);
         })
-    })*/
-
-    for(let l=0;l<listMarkerMap.length;l++){
-        let nameId=listMarkerMap[l].src.match(markerIdRegex);
-        console.log(nameId);
-        nameId=nameId[0].split('/');
-        nameId=nameId[1].split('.')[0];
-        listMarkerMap[l].id=nameId;
-
-        listMarkerMap[l].addEventListener('click',()=>{
-            infoLieu(listMarkerMap[l].id);
-        })
-    }
+    })
 }
 newListMarker();
 
@@ -140,17 +129,21 @@ function infoLieu(id){
     const conteneurInfo=document.getElementById('conteneurInformations');
 
     for(let t=0;t<infoCarte.length;t++){
+
         let todayDate= new Date();
-        if(infoCarte[t].type==id){ //AFFICHAGE DES INFOS SUR LES LIEUX
+
+        //AFFICHAGE DES INFOS SUR LES LIEUX
+        if(infoCarte[t].type==id){ 
             let infoItem=cms.replaceTemplate(infoCarte[t],infoFoodTemplate);
             conteneurInfo.innerHTML=infoItem;
             conteneurInfo.style.backgroundColor="beige";
         } 
 
-        if(infoCarte[t].type=="concert"||infoCarte[t].type=="atelier"||infoCarte[t].type=="performance"){ //AFFICHAGE DES SPECTACLES EN TEMPS REEL PAR SCENE
+        //AFFICHAGE DES SPECTACLES EN TEMPS REEL PAR SCENE
+        if(infoCarte[t].type=="concert"||infoCarte[t].type=="atelier"||infoCarte[t].type=="performance"){ 
             if(infoCarte[t].scene.toLowerCase()==id){
+                
                 let infoDate=new Date(infoCarte[t].dateF);
-                console.log(todayDate);
 
                 if(infoDate<=todayDate){
                     let infoItem=cms.replaceTemplate(infoCarte[t],infoConcertTemplate);
@@ -171,19 +164,11 @@ function infoLieu(id){
 
 const btnRadio=document.getElementsByClassName('leaflet-control-layers-selector');
 
-for(let i=0;i<btnRadio.length;i++){
-    btnRadio[i].addEventListener('click',()=>{
-        newListMarker();
-    })
-}
-
-
-/*
-btnRadio.forEach(function(btn){
+Array.from(btnRadio).forEach(function(btn){
     btn.addEventListener('click',()=>{
         newListMarker();
     })
 })
 
     
-}*/
+

@@ -38,15 +38,15 @@ let jour=[
 //Fonction d'affichage par scenes
 
 function affichageScenes(tabJour){ 
-    for (let j=0;j<tabScenes.length;j++){
+
+    tabScenes.forEach(itemScene => {
         let scene=[];
-        filtre.filtreScene(tabJour,tabScenes[j],scene)
+        filtre.filtreScene(tabJour,itemScene,scene);
         for(let i=0;i<scene.length;i++){
             scene[i]= cms.replaceTemplate(scene[i],concertTemplate);
         }
-    document.getElementById(tabScenes[j].toLowerCase()).innerHTML=scene.join(' ');
-    console.log(tabScenes[j].toLowerCase());
-    }
+        document.getElementById(itemScene.toLowerCase()).innerHTML=scene.join(' ');
+    })
 }
 
 //Fonction filtrage par jour
@@ -59,8 +59,8 @@ function concertJour(jour){
 
 //AddEventListener sur les inputs jour
 
-for (let c=0;c<jour.length;c++){
-    let inputJour=document.getElementById(jour[c].idJour)
-    inputJour.addEventListener('click', ()=> concertJour(jour[c].date))
-}
+jour.forEach(dataJour => {
+    let inputJour=document.getElementById(dataJour.idJour);
+    inputJour.addEventListener('click', ()=> concertJour(dataJour.date));
+})
 concertJour(jour[0].date);

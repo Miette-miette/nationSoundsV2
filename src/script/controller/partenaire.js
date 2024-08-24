@@ -12,25 +12,30 @@ console.log(dataPartenaire);
 
 const partenaireTemplate= await fetchRessource("../../view/partenaire/partenaireTemplate.html"); //Template de la page programme
 
+// TEMPLATING HTML DES ARTICLES PARTENAIRES 
+
 function affichageItem(tab,conteneur){ 
-       
-    for(let i=0;i<tab.length;i++){
-        tab[i]= cms.replaceTemplate(tab[i],partenaireTemplate); 
-    }
-    document.getElementById(conteneur).innerHTML=tab.join(' '); 
+
+    let partenaires=[]
+    
+    tab.forEach((elem)=> elem = partenaires.push(cms.replaceTemplate(elem,partenaireTemplate)));  
+   
+    document.getElementById(conteneur).innerHTML=partenaires.join(' '); 
 }
+
+//TRI PAR CATEGORIES
 
 let institution=[];
 let entreprise=[];
 
-for(let i=0;i<dataPartenaire.length;i++){
-    if(dataPartenaire[i].type=="institution"){
-        institution.push(dataPartenaire[i]);
+dataPartenaire.forEach(partenaire => {
+    if(partenaire.type=="institution"){
+        institution.push(partenaire);
     }
-    if(dataPartenaire[i].type=="entreprise"){
-        entreprise.push(dataPartenaire[i]);
+    if(partenaire.type=="entreprise"){
+        entreprise.push(partenaire);
     }
-}
+})
 
 affichageItem(institution,"institutionConteneur");
 affichageItem(entreprise,"entrepriseConteneur");

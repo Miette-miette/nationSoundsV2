@@ -8,18 +8,17 @@ let filtre= new filtreProgramme;
 
 //CATEGORIE CONCERT ID=19
 
-const articleCMS= await cms.dataCMS("https://nation-soundswp-am41helgut.live-website.com/wp-json/wp/v2/posts?categories=19&per_page=60");// Articles Categorie Concert de Nation Sounds WP 
-console.log(articleCMS);
-
+// Articles Categorie Concert de Nation Sounds WP
+const articleCMS= await cms.dataCMS("https://nation-soundswp-am41helgut.live-website.com/wp-json/wp/v2/posts?categories=19&per_page=60"); 
+//données formatées
 let dataArticle= cms.formateur(articleCMS);
-console.log(dataArticle); //données formatées
+//Template de la page concert
+const concertTemplate= await fetchRessource("../../view/concert/concertTemplate.html"); 
 
-const concertTemplate= await fetchRessource("../../view/concert/concertTemplate.html"); //Template de la page concert
-
+//Tableau des differentes scènes
 const tabScenes=["Euphorie","Fusion","Reverie","Resonance","Prisme"];
 
 //Objet jour avec ID 
-
 let jour=[
     {
         date:"Vendredi 26 juillet",
@@ -36,7 +35,6 @@ let jour=[
     ];
 
 //Fonction d'affichage par scenes
-
 function affichageScenes(tabJour){ 
 
     tabScenes.forEach(itemScene => {
@@ -50,7 +48,6 @@ function affichageScenes(tabJour){
 }
 
 //Fonction filtrage par jour
-
 function concertJour(jour){
     let tabJour=[];
     filtre.filtreJour(dataArticle,jour,tabJour);
@@ -58,7 +55,6 @@ function concertJour(jour){
 }
 
 //AddEventListener sur les inputs jour
-
 jour.forEach(dataJour => {
     let inputJour=document.getElementById(dataJour.idJour);
     inputJour.addEventListener('click', ()=> concertJour(dataJour.date));

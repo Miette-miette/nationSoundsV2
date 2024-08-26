@@ -7,32 +7,27 @@ let cms= new CMS();
 let ressource= new ressourceCarte();
 
 //CATEGORIE CARTE ID=6
-
-const carteCMS= await cms.dataCMS("https://nation-soundswp-am41helgut.live-website.com/wp-json/wp/v2/posts?categories=6");// Carte de Nation Sounds WP 
-console.log(carteCMS);
-
-let infoCarte= await cms.dataCMS("https://nation-soundswp-am41helgut.live-website.com/wp-json/wp/v2/posts?categories=10+14&per_page=80");//Informations des lieux et des scènes
+// Carte de Nation Sounds WP
+const carteCMS= await cms.dataCMS("https://nation-soundswp-am41helgut.live-website.com/wp-json/wp/v2/posts?categories=6"); 
+//Informations des lieux et des scènes
+let infoCarte= await cms.dataCMS("https://nation-soundswp-am41helgut.live-website.com/wp-json/wp/v2/posts?categories=10+14&per_page=80");
 infoCarte=cms.formateur(infoCarte);
-console.log(infoCarte);
 
 // TEMPLATES
-
-const infoConcertTemplate= await fetchRessource("../../view/carte/template/carteConcertTemplate.html");//Affichage des evenements
-
-const infoFoodTemplate= await fetchRessource("../../view/carte/template/carteFoodTemplate.html");//Affichage des restaurants
-
-const aucunConcertTemplate= await fetchRessource("../../view/carte/template/aucunEvent.html");//Affichage si event=null
+//Affichage des evenements
+const infoConcertTemplate= await fetchRessource("../../view/carte/template/carteConcertTemplate.html");
+//Affichage des restaurants
+const infoFoodTemplate= await fetchRessource("../../view/carte/template/carteFoodTemplate.html");
+//Affichage si event=null
+const aucunConcertTemplate= await fetchRessource("../../view/carte/template/aucunEvent.html");
 
 // DONNEES FORMATEES
-
-let dataCarte= cms.carteData(carteCMS);//données formatées
-console.log(dataCarte);
+let dataCarte= cms.carteData(carteCMS);
 
 //CREATION DES OBJETS MARQUEUR (données géographique, class, icon)
-
 const dataMarkerRegex=/marker((.|\n)+?)<\/script>/gm;
-
-let dataMarker=carteCMS[0].content.rendered.match(dataMarkerRegex); //Données brutes des marqueurs
+//Données brutes des marqueurs
+let dataMarker=carteCMS[0].content.rendered.match(dataMarkerRegex); 
 
 let all=[];
 let scene=[];
@@ -54,8 +49,6 @@ function formatageMarker(){
                 wc.push(marker);
         }
         all.push(marker);  
-        console.log(markerObj);
-
     }
 }
 formatageMarker();
@@ -73,7 +66,6 @@ let markerFiltre={
 }
 
 //RECUPERATION DES DONNEES GEOGRAPHIQUES DE LA MAP
-
 const latitudeRegex=/setView\(\[(\d*.\d*)/gm;
 const longitudeRegex=/setView\(\[\d*.\d*\,(\d*.\d*)/gm;
 
@@ -84,7 +76,6 @@ let longitudeMap=carteCMS[0].content.rendered.match(longitudeRegex);
 longitudeMap=longitudeMap[0].split(',')[1];
 
 //SETUP DE LA MAP ET AFFICHAGE DES LAYERS
-
 let map = L.map('map',{
     center:[latitudeMap,longitudeMap],
     zoom: 15,
@@ -100,11 +91,8 @@ allLayer.addTo(map);
 L.control.layers(markerFiltre).addTo(map);
 
 //RECUPERATION DES INFORMATIONS SUPPLEMENTAIRES
-
 let markerIdRegex=/06\/(.*).png/gm;
-
 let listMarkerMap= document.getElementsByClassName('leaflet-marker-icon');
-console.log(listMarkerMap);
 
 function newListMarker(){
 
@@ -123,7 +111,6 @@ function newListMarker(){
 newListMarker();
 
 //FONCTION POUR AFFICHER LES INFOS RELATIVES AUX MARQUEURS
-
 function infoLieu(id){
 
     const conteneurInfo=document.getElementById('conteneurInformations');
@@ -161,7 +148,6 @@ function infoLieu(id){
 }
 
 //ADD EVENT LISTENER POUR LE CHANGEMENT DE LAYER
-
 const btnRadio=document.getElementsByClassName('leaflet-control-layers-selector');
 
 Array.from(btnRadio).forEach(function(btn){

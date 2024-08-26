@@ -3,20 +3,18 @@ import filtreProgramme from './filtreProgramme.js';
 import fetchRessource from '../model/fetchArticle.js';
 
 let cms= new CMS(); 
-
 let filtre= new filtreProgramme;
 
 //CATEGORIE PROGRAMATION ID=14
+// Articles programmation de Nation Sounds WP
+const articleCMS= await cms.dataCMS("https://nation-soundswp-am41helgut.live-website.com/wp-json/wp/v2/posts?categories=14&per_page=60"); 
+//données formatées
+const dataArticle= cms.formateur(articleCMS);
+//Template de la page programme
+const progTemplate= await fetchRessource("../../view/programme/programmeTemplate.html"); 
 
-const articleCMS= await cms.dataCMS("https://nation-soundswp-am41helgut.live-website.com/wp-json/wp/v2/posts?categories=14&per_page=60");// Articles programmation de Nation Sounds WP 
-console.log(articleCMS);
-
-const dataArticle= cms.formateur(articleCMS);//données formatées
-console.log(dataArticle); 
-
-const progTemplate= await fetchRessource("../../view/programme/programmeTemplate.html"); //Template de la page programme
-
-let progFiltre={//DONNEES DES FILTRES
+//DONNEES DES FILTRES
+let progFiltre={
     
     "jour": "tous" ,
     "heure": 14,
@@ -24,7 +22,8 @@ let progFiltre={//DONNEES DES FILTRES
     "type":"tous",  
 }
 
-let iconeScene={//ICONES DES SCENES
+//ICONES DES SCENES
+let iconeScene={
     "Euphorie":"/src/assets/media/scene/euphorie.png",
     "Fusion":"/src/assets/media/scene/fusion.png",
     "Reverie":"/src/assets/media/scene/fusion.png",
@@ -64,12 +63,9 @@ cms.pageInformation("progItem",dataArticle);
 function filtrageItem(data,progFiltre){
     let progTab=[];
     
-    filtre.filtreAll(data,progFiltre,progTab)
-    
+    filtre.filtreAll(data,progFiltre,progTab);   
     affichageItem(progTab);
-    cms.pageInformation("progItem",data);
-    console.log(progTab);
-    
+    cms.pageInformation("progItem",data);  
 }
 
 //RECUPERER LES DONNEES DES INPUTS
@@ -87,7 +83,6 @@ function filtreChange(){
     //TYPE
     progFiltre.type=document.getElementById("type").value;
 
-    console.log(progFiltre);
     //FILTRAGE 
     filtrageItem(dataArticle,progFiltre);
 }

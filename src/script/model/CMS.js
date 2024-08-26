@@ -13,7 +13,6 @@ export default function CMS(){
   }
 
 //Fonction pour formater les données du CMS en un nouvel objet
-
   this.formateur=function(articleCMS){
       const captureP= /^<p\s+([a-z]+="[A-z]+")*\s*>(.*)<\/p>$/mg; //Capture des paragraphe des articles
       const captureJPG= /src="(.*\.jpg)"/mg;// Capture de l'image
@@ -21,8 +20,15 @@ export default function CMS(){
       let dataGlobale=[];
       
       articleCMS.forEach(itemArticle => {
-        let matches=itemArticle.content.rendered.matchAll(captureP);//Capture des differentes parties des articles
         let dataConcert={};//Objet contenant les données des articles du CMS
+        
+        //Récupération des noms de classe pour creer des clés/valeurs 
+        let matches=itemArticle.content.rendered.matchAll(captureP);//Capture des differentes parties des articles
+        for (const match of matches) { //Récupération des classes de l'article pour creer les objets            
+            let contenuConcert=match[2];//2 = contenu de la balise         
+            let classeConcert= match[1].split('"');//0 = "class" et 1 = nom de la classe         
+            dataConcert[classeConcert[1]]=contenuConcert;
+        }
 
         //Recuperation de l'image
         let img=itemArticle.content.rendered.match(captureJPG);
@@ -41,12 +47,6 @@ export default function CMS(){
         let article=itemArticle.content.rendered.match(captureDivArticle);  
         dataConcert["corps"]=article;
         
-        //Récupération des noms de classe pour creer des clés/valeurs
-        for (const match of matches) { //Récupération des classes de l'article pour creer les objets            
-            let contenuConcert=match[2];//2 = contenu de la balise         
-            let classeConcert= match[1].split('"');//0 = "class" et 1 = nom de la classe         
-            dataConcert[classeConcert[1]]=contenuConcert;
-        }
         dataGlobale.push(dataConcert);
       })
       return dataGlobale
@@ -89,13 +89,12 @@ export default function CMS(){
 
       for (let i=0;i<data.length;i++){
           if(title==data[i].title){
-            console.log(data[i]);
-              return data[i];
+            return data[i];
           }
       }     
     } 
 
-    //Fonction pour generer la page informations
+    //Fonction pour generer la page information
     this.pageInformation=function(classItem,data){
       let cardItem=document.getElementsByClassName(classItem);
     

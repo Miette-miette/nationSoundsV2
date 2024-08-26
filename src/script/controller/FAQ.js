@@ -1,11 +1,6 @@
 const question= document.getElementsByClassName("question");
-console.log(question);
-
 const reponse=document.getElementsByClassName("reponse");
-console.log(reponse);
-
 const imgFleche=document.getElementsByClassName('voirPlus');
-console.log(imgFleche);
 
 function showQuestion(){
 

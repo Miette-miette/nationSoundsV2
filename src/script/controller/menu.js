@@ -1,9 +1,6 @@
 const menuBtn= document.getElementById("menuBtn");
-
 const menuCollapse=document.getElementById("menuInfo");
-
 const menuImg=document.getElementById("iconMenu");
-
 
 function showMenu(){
 

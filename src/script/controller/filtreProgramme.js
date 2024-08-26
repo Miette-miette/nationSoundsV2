@@ -8,11 +8,9 @@ export default function filtreProgramme(){
                 tabJour.sort((a,b)=>(a.scene>b.scene)?1:-1)//trier par scene      
             }  
         })
-        console.log(tabJour, "affichage jour");
     }
 
     //Filtrage par scene et tri par heure
-
     this.filtreScene=function(tabJour,scene,tabScene){
         tabJour.forEach(jour=>{
             if(jour.scene==scene){
@@ -20,11 +18,9 @@ export default function filtreProgramme(){
                 tabScene.sort((a,b)=>(a.heureF>b.heureF ? 1:-1)) //trier par heure 
             }
         })
-        console.log(tabScene, "affichage scene");
     }
 
     //Filtrage par type et par heure
-
     this.filtreType=function(tabData,type,tabType){
         tabData.forEach(itemData=>{
             if(itemData.type==type){
@@ -32,11 +28,9 @@ export default function filtreProgramme(){
                 tabType.sort((a,b)=>(a.heureF>b.heureF ? 1:-1)) //trier par heure  
             }
         })
-        console.log(tabType, "affichage type");
     }
 
-    //Filtrage par heure
-
+    //Filtrage uniquement par heure
     this.filtreHeure=function(tabData,heure,tabHeure){
         tabData.forEach(itemData=>{
             if(itemData.heureF>=heure ){
@@ -44,7 +38,6 @@ export default function filtreProgramme(){
                 tabHeure.sort((a,b)=>(a.heureF>b.heureF ? 1:-1)) //trier par heure 
             }
         })
-        console.log(tabHeure, "affichage heure");
     }
 
     //FILTRAGE DYNAMIQUE POUR PAGE PROGRAMATION

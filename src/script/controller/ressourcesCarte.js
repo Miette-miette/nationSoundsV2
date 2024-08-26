@@ -1,7 +1,6 @@
 export default function ressourceCarte(){
 
     //Creation objet icon
-
     this.iconObj=function(url,longueur,largeur){
         let icon=L.icon({
             iconUrl:url, 

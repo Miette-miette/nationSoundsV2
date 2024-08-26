@@ -4,31 +4,25 @@ import fetchRessource from '../model/fetchArticle.js';
 let cms= new CMS(); 
 
 //RESSOURCES
-
 const hostArticle="https://nation-soundswp-am41helgut.live-website.com/wp-json/wp/v2/posts?categories=5";
 const hostConcert="https://nation-soundswp-am41helgut.live-website.com/wp-json/wp/v2/posts?categories=19&per_page=60";
-
-let concertCMS= await cms.dataCMS(hostConcert);// Articles programmation de Nation Sounds WP 
-
-let articleCMS= await cms.dataCMS(hostArticle);//Articles actu
-console.log(articleCMS);
+// Articles programmation de Nation Sounds WP 
+let concertCMS= await cms.dataCMS(hostConcert);
+//Articles actu
+let articleCMS= await cms.dataCMS(hostArticle);
 
 //FORMATAGE 
-
+//données formatées
 let dataConcert= cms.formateur(concertCMS);
-console.log(dataConcert); //données formatées
-
 let dataArticle= cms.formateur(articleCMS);
-console.log(dataArticle);
 
 //TEMPLATES
-
-const artisteTemplate= await fetchRessource("/src/view/generals/carouselCard.html"); //Template du carousel artiste
-
+//Template du carousel artiste
+const artisteTemplate= await fetchRessource("/src/view/generals/carouselCard.html"); 
+//Template des articles d'actualités
 const articleTemplate= await fetchRessource("/src/view/generals/articleCard.html"); 
 
 //FONCTION POUR LE TEMPLATING HTML
-
 function affichageCarousel(tab,template,idConteneur){ 
 
   let displayArticles=[];

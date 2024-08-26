@@ -13,22 +13,26 @@ un projet fictif réalisé dans le cadre de la formation DWWM de l'EPSI
 
 ## TECHNOLOGIE
 
-FRAMEWORK:
 ***
+FRAMEWORK:
+
 Bootstrap
 https://getbootstrap.com/
 
-LIBRARY:
 ***
+LIBRARY:
+
 AOS
 https://michalsnik.github.io/aos/
 
-REGEX BUILDER:
 ***
+REGEX BUILDER:
+
 https://regex101.com/
 
-API TESTING:
 ***
+API TESTING:
+
 https://www.postman.com/
 
 

@@ -4,7 +4,7 @@ import fetchRessource from '../model/fetchArticle.js';
 let cms= new CMS(); 
 
 //RESSOURCES
-const hostArticle="https://nation-soundswp-am41helgut.live-website.com/wp-json/wp/v2/posts?categories=5";
+const hostArticle="http://127.0.0.1:8000/index.php/concert/data";
 const hostConcert="https://nation-soundswp-am41helgut.live-website.com/wp-json/wp/v2/posts?categories=19&per_page=60";
 // Articles programmation de Nation Sounds WP 
 let concertCMS= await cms.dataCMS(hostConcert);

@@ -39,7 +39,6 @@ function formatageMarker(){
             case "scene":
                 scene.push(marker);
                 all.push(marker); 
-                console.log(markerObj.class);
                 continue;
                 
             case "food":
@@ -53,10 +52,7 @@ function formatageMarker(){
                 continue;
             default:
                 all.push(marker); 
-        }
-        console.log(scene, "scene");
-        console.log(wc, "wc");
-        console.log(food, "food");   
+        } 
     }
 }
 formatageMarker();

@@ -1,16 +1,59 @@
+import axios, {isCancel, AxiosError} from '../../../node_modules/axios/index.js'; 
+
 export default function CMS(){
+  
+  /*let requirejs = require('requirejs');
+  requirejs.config({
+    //Pass the top-level main.js/index.js require
+    //function to requirejs so that node modules
+    //are loaded relative to the top-level JS file.
+    nodeRequire: require
+  });*/
+  
+
+  /*const axios = require('axios').defaults;*/
+
+  this.dataCMS = async function(src = null) {
+    try {
+        const response = await axios.get(src, { responseType: 'json' });
+        console.log(response.data); // Access the data directly
+        return response.data; // Return the data
+    } catch (error) {
+        console.error("Error fetching data:", error);
+        // Handle the error appropriately, e.g., return a default value or throw the error
+        return null; // Or throw error;
+    }
+};
+
+  /*this.dataCMS=async function(src=null){
+    axios({
+      method: 'get',
+      url: src,
+      responseType: 'json'
+    })
+    .then(function (response) {
+      console.log(response);   
+    });
+    return await promise; 
+  }*/
 
 //Fonction pour recuperer les données du CMS
-  this.dataCMS=async function(src=null){
+  /*this.dataCMS=async function(src=null){
       let promise = fetch(src)
-        .then((res) => res.json())
+        .then(res => {
+          //Voir si il y a une erreur réseau
+          if (!res.ok) {
+            console.log(res);
+        }
+          return res.json();
+        })
         .catch(error => {
           console.log(error);
           return {};
         })
         .then((res) => res);
     return await promise; 
-  }
+  }*/
 
 //Fonction pour formater les données du CMS en un nouvel objet
   this.formateur=function(articleCMS){

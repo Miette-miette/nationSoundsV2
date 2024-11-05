@@ -21,9 +21,6 @@ const infoFoodTemplate= await fetchRessource("../../view/carte/template/carteFoo
 //Affichage si event=null
 const aucunConcertTemplate= await fetchRessource("../../view/carte/template/aucunEvent.html");
 
-// DONNEES FORMATEES
-let dataCarte= cms.carteData(carteCMS);
-
 //CREATION DES OBJETS MARQUEUR (données géographique, class, icon)
 const dataMarkerRegex=/marker((.|\n)+?)<\/script>/gm;
 //Données brutes des marqueurs
@@ -41,14 +38,25 @@ function formatageMarker(){
         switch(markerObj.class){
             case "scene":
                 scene.push(marker);
-
+                all.push(marker); 
+                console.log(markerObj.class);
+                continue;
+                
             case "food":
                 food.push(marker);
+                all.push(marker); 
+                continue;
 
             case "wc":
                 wc.push(marker);
+                all.push(marker); 
+                continue;
+            default:
+                all.push(marker); 
         }
-        all.push(marker);  
+        console.log(scene, "scene");
+        console.log(wc, "wc");
+        console.log(food, "food");   
     }
 }
 formatageMarker();
@@ -57,13 +65,6 @@ let allLayer=L.layerGroup(all);
 let sceneLayer=L.layerGroup(scene);
 let foodLayer=L.layerGroup(food);
 let wcLayer=L.layerGroup(wc);
-
-let markerFiltre={
-    "Tous": allLayer,
-    "Scenes": sceneLayer,
-    "Restauration": foodLayer,
-    "WC": wcLayer,
-}
 
 //RECUPERATION DES DONNEES GEOGRAPHIQUES DE LA MAP
 const latitudeRegex=/setView\(\[(\d*.\d*)/gm;
@@ -88,7 +89,13 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 
 allLayer.addTo(map);
 
-L.control.layers(markerFiltre).addTo(map);
+let layerControl= L.control.layers().addTo(map);
+
+layerControl.addOverlay(allLayer, "Tous").addTo(map);
+layerControl.addOverlay(sceneLayer, "scenes").addTo(map);
+layerControl.addOverlay(foodLayer, "restauration").addTo(map);
+layerControl.addOverlay(wcLayer, "wc").addTo(map);
+
 
 //RECUPERATION DES INFORMATIONS SUPPLEMENTAIRES
 let markerIdRegex=/06\/(.*).png/gm;
@@ -102,6 +109,8 @@ function newListMarker(){
         nameId=nameId[0].split('/');
         nameId=nameId[1].split('.')[0];
         marker.id=nameId;
+        console.log(marker);
+        
 
         marker.addEventListener('click',()=>{
             infoLieu(marker.id);
@@ -148,11 +157,12 @@ function infoLieu(id){
 }
 
 //ADD EVENT LISTENER POUR LE CHANGEMENT DE LAYER
-const btnRadio=document.getElementsByClassName('leaflet-control-layers-selector');
+const btnCheck=document.getElementsByClassName('leaflet-control-layers-selector');
 
-Array.from(btnRadio).forEach(function(btn){
+Array.from(btnCheck).forEach(function(btn){
     btn.addEventListener('click',()=>{
         newListMarker();
+
     })
 })
 

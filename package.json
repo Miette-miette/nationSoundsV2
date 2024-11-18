@@ -1,0 +1,14 @@
+{
+  "dependencies": {
+    "@babel/polyfill": "^7.12.1",
+    "form-data": "^4.0.1"
+  },
+  "scripts": {
+    "build": "babel src -d lib"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.25.9",
+    "@babel/core": "^7.26.0",
+    "@babel/preset-env": "^7.26.0"
+  }
+}
